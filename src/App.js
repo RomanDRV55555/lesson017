@@ -1,10 +1,14 @@
 import './App.css';
+import Contacts from './components/Contacts';
+
 
 function App() {
+
   return (
-    <div className="App"> Lesson 017
+    <div>
+      <Contacts />
     </div>
-  );
+  )
 }
 
 export default App;
