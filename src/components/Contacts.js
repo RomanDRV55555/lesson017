@@ -7,21 +7,47 @@ function Contacts(props) {
 
     let [search, setSearch] = useState("");
     let [arrForDisp, getContactsList] = useState(test_contacts);
+    let [checkMale, setCheckMale] = useState(true);
+    let [checkFemale, setCheckFemale] = useState(true);
 
     useEffect(() => {
+        console.log("search", search);
+        console.log("checkMale", checkMale);
+        console.log("checkFemale", checkFemale);
         getContactsList(
             test_contacts.filter((element) =>
-
-                Object.values(element).filter(
-                    (curValue) => curValue.toLowerCase().includes(search.toLowerCase())
-                ).length > 0
-            ))
+                (element.firstName.toLowerCase().includes(search.toLowerCase()) ||
+                    element.lastName.toLowerCase().includes(search.toLowerCase()) ||
+                    element.phone.includes(search))
+                &&
+                (
+                    (checkMale && (element.gender === "male"))
+                    ||
+                    (checkFemale && (element.gender === "female"))
+                    ||
+                    (!checkMale && !checkFemale && !element.gender)
+                )
+            )
+        )
     },
-        [search]);
+        [search, checkMale, checkFemale]);
+
+    const onChangeCheckMale = ({ target: { checked } }) => {
+        setCheckMale(checked);
+    };
+
+    const onChangeCheckFemale = ({ target: { checked } }) => {
+        setCheckFemale(checked);
+    };
 
     return (
         <div className="divTable">
-            <label > Search for: <input type="text" onChange={(event) => { setSearch(event.target.value) }} /></label>
+            <label > Search for: <input type="text"
+                onChange={(event) => { setSearch(event.target.value) }}
+            />
+                <input type="checkbox" defaultChecked={checkMale} onChange={onChangeCheckMale} /> Male
+                <input type="checkbox" defaultChecked={checkFemale} onChange={onChangeCheckFemale} /> Female
+            </label>
             <div >
                 <table className="table">
                     <thead>

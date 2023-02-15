@@ -14,6 +14,12 @@
     left: 0;
 } */
 
+img{
+    font-size: 5px;
+    border-radius: 10px; 
+    border: 5px solid #fff; 
+}
+
 .divTable {
     width: 700px;
 }
@@ -23,6 +29,7 @@
     background-color: #fff;
     font-family: 'Almarai', Arial, sans-serif;
     font-size: 10pt;
+    padding: 5px;
 }
 
 .table {
